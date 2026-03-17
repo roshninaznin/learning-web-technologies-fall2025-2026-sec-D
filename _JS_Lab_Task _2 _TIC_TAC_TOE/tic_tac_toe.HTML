@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tic Tac Toe</title>
+
+
+
+<style>
+button{
+  width:80px;
+  height:80px;
+  font-size:30px;
+}
+
+#btn{
+  width:150px;
+  height:100px;
+  font-size:30px;
+}
+
+</style>
+
+
+
+</head>
+<body align="center">
+
+<h2>Tic Tac Toe</h2>
+
+<button onclick="play(0)"></button>
+<button onclick="play(1)"></button>
+<button onclick="play(2)"></button><br>
+
+<button onclick="play(3)"></button>
+<button onclick="play(4)"></button>
+<button onclick="play(5)"></button><br>
+
+<button onclick="play(6)"></button>
+<button onclick="play(7)"></button>
+<button onclick="play(8)"></button>
+
+<p id="status">Player X turn</p>
+<button id="btn" onclick="resetGame()">Reset</button>
+
+<script>
+
+let player = "X";
+let game = true;
+
+function play(index){
+
+    let btn = document.getElementsByTagName("button")[index];
+
+    if(btn.innerHTML != "" || game == false){
+        return;
+    }
+
+    btn.innerHTML = player;
+
+
+    let b = document.getElementsByTagName("button");
+
+    if(
+        (b[0].innerHTML==player && b[1].innerHTML==player && b[2].innerHTML==player) ||
+        (b[3].innerHTML==player && b[4].innerHTML==player && b[5].innerHTML==player) ||
+        (b[6].innerHTML==player && b[7].innerHTML==player && b[8].innerHTML==player) ||
+
+        (b[0].innerHTML==player && b[3].innerHTML==player && b[6].innerHTML==player) ||
+        (b[1].innerHTML==player && b[4].innerHTML==player && b[7].innerHTML==player) ||
+        (b[2].innerHTML==player && b[5].innerHTML==player && b[8].innerHTML==player) ||
+
+        (b[0].innerHTML==player && b[4].innerHTML==player && b[8].innerHTML==player) ||
+        (b[2].innerHTML==player && b[4].innerHTML==player && b[6].innerHTML==player)
+    ){
+        document.getElementById("status").innerHTML = "Player " + player + " wins!";
+        game = false;
+        return;
+    }
+
+    if(
+        b[0].innerHTML!="" && b[1].innerHTML!="" && b[2].innerHTML!="" &&
+        b[3].innerHTML!="" && b[4].innerHTML!="" && b[5].innerHTML!="" &&
+        b[6].innerHTML!="" && b[7].innerHTML!="" && b[8].innerHTML!=""
+    ){
+        document.getElementById("status").innerHTML = "Draw!";
+        game = false;
+        return;
+    }
+
+    if(player == "X"){
+        player = "O";
+    }else{
+        player = "X";
+    }
+
+    document.getElementById("status").innerHTML = "Player " + player + " turn";
+}
+
+function resetGame(){
+
+    let b = document.getElementsByTagName("button");
+
+    for(let i=0;i<9;i++){
+        b[i].innerHTML = "";
+    }
+
+    player = "X";
+    game = true;
+
+    document.getElementById("status").innerHTML = "Player X turn";
+}
+
+</script>
+
+</body>
+</html>
